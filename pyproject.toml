@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "sitcon-camp-special-bot"
+version = "0.1.0"
+description = ""
+authors = ["Vincent550102 <5020559@gmail.com>"]
+readme = "README.md"
+packages = [{include = "sitcon_camp_special_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-telegram-bot = "^20.3"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
