@@ -6,6 +6,7 @@ class Database():
     def __init__(self):
         self.conn = sqlite3.connect(
             'database/sqlite.db', check_same_thread=False)
+        self.conn.row_factory = sqlite3.Row
         self.conn.execute('DROP TABLE IF EXISTS department')
         self.conn.execute('DROP TABLE IF EXISTS course')
         self.conn.execute('DROP TABLE IF EXISTS Building_coord_id')
@@ -56,8 +57,12 @@ class Database():
 
     def run_sql(self, sql):
         try:
+            if sum([sql.lower().count(x) for x in ['update', 'insert', 'delete']]) > 0:
+                return "Please use SELECT statement only."
             cursor = self.conn.execute(sql)
-            todos = cursor.fetchall()
-            return todos
+            todos = [dict(row) for row in cursor.fetchall()]
+            if len(str(todos)) < 1000:
+                return todos
+            return str(todos)[:1000] + " ... Message too long please use WHERE."
         except Exception as e:
             return str(e)
