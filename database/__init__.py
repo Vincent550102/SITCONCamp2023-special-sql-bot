@@ -14,7 +14,7 @@ class Database():
         self.conn.execute('DROP TABLE IF EXISTS Book')
         self.conn.commit()
         self.cur = self.conn.cursor()
-        sql_inits = open('database/init.sql', 'r').read()
+        sql_inits = open('database/init.sql', 'r',encoding="utf-8").read()
         for sql_init in sql_inits.split(';'):
             self.conn.executescript(sql_init)
             self.conn.commit()
